@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'streaks/stats'
+
+file = ARGV[0]
+
+abort 'Usage: streaks-stats <data.streaks>' unless file
+
+stats = Streaks::Stats::Parser.new(file)
+
+puts "Stats for #{file}"
+
+stats.habits.each do |habit|
+  puts "\n"
+  puts "Habit: #{habit.name}"
+  habit.monthly_stats.each do |month, val|
+    puts "  #{month}: #{val}"
+  end
+end
